@@ -1,0 +1,13 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+app_camper:
+    path: /
+    controller: App\Controller\CamperController::index
+app_import:
+    path: /import
+    controller: App\Controller\CamperController::import
+app_info:
+    path: /info
+    controller: App\Controller\CamperController::info
