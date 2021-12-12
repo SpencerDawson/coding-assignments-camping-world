@@ -21,7 +21,7 @@ Docker is used to host a local env for the site, running PHP, PostgrSQL, and NGI
 $ docker-compose up -d
 ```
 
-Site should load at http://localhost:8080/
+Site should load at http://localhost:9080/
 
 ### Notice
 
