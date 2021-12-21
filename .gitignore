@@ -7,6 +7,10 @@
 ## ignore certs for use in certain environments
 **.crt
 
+##
+project/public/build/
+project/public/upload/cvs/*
+
 ###> symfony/framework-bundle ###
 project/.env.local
 project/.env.local.php

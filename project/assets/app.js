@@ -6,10 +6,11 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
+import './styles/app.scss';
 
-// loads the jquery package from node_modules
+// // loads the jquery package from node_modules
 import $ from 'jquery';
+import 'bootstrap'
 
 // start the Stimulus application
 import './bootstrap';

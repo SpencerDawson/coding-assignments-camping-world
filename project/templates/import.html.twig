@@ -12,5 +12,22 @@
 {% endblock %}
 
 {% block body %}
-    {# {{ parent() }} #}
+    {{ parent() }}
+    <div class="container">
+        <br/>
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <div class="form-row">
+                <div class="col">
+                    {{ form_row(form.file) }}
+                </div>
+            </div>
+
+            {{ form_rest(form) }}
+            <br/>
+            <button class="btn btn-success btn-lg btn-block" id="postSubmit">
+                {{ button_label|default('Save') }}
+            </button>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

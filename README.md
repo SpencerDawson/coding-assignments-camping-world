@@ -30,3 +30,7 @@ Most ENV vars exist only within the docker environment, so running `composer req
 ```shell
 $ docker exec -it cw_php sh
 ```
+
+## Regarding .env files
+
+.env files are stored in this project, as a sample only. files with sensitive information should never be shared in a repository and should be kept either locally or stored in a docker secret.
