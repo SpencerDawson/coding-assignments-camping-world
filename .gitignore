@@ -4,6 +4,9 @@
 .idea/
 .vscode/
 
+## ignore certs for use in certain environments
+**.crt
+
 ###> symfony/framework-bundle ###
 project/.env.local
 project/.env.local.php
