@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Documents;
+use App\Entity\Campers;
 use App\Form\Type\CSVType;
 use App\Service\FileUploader;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Persistence\ManagerRegistry;
 
 class CamperController extends AbstractController
 {
@@ -26,20 +29,47 @@ class CamperController extends AbstractController
      * Path "/import"
      * Name "app_import"
      */
-    public function import(Request $request, FileUploader $fileUploader): Response
+    public function import(Request $request, FileUploader $fileUploader, ManagerRegistry $doctrine): Response
     {
         $form = $this->createForm(CSVType::class);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            $doc = new Documents();
-            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $csv */
+            $em = $doctrine->getManager();
+            /** @var UploadedFile $csv */
             $csv = $form->get('file')->getData();
-            // $csvFileName = $fileUploader->upload($csv);
+            /** @var Documents $doc */
+            $doc = new Documents();
+
+            $doc->setPath("");
+            $doc->setType($csv->getMimeType());
             $doc->setName($fileUploader->upload($csv));
-            $doc->setType();
-            // $product->setBrochureFilename($csvFileName);
-    
+
+            $em->persist($doc);
+            $em->flush();
+
+            $rowNo = 1;
+            if (($fp = fopen($doc->getAbsolutePath().$doc->getName(),"r")) !== false)
+            {
+                while (($row = fgetcsv($fp, 1000, ",")) !== FALSE)
+                {
+                    if($rowNo == 1){ $rowNo++; continue; }
+                    /** @var Campers $camper */
+                    $camper = new Campers();
+                    
+                    $camper->setDoc($doc);
+                    $camper->setMake($row[0]);
+                    $camper->setBrand($row[1]);
+                    $camper->setCapacity((int)$row[2]);
+                    $camper->setPrice((int)$row[3]);
+                    
+                    $em->persist($camper);
+                    $em->flush();
+                    unset($camper);
+                }
+                fclose($fp);
+            }
+
             return $this->redirectToRoute('app_camper', [
                 'file_name' => $doc->getName(),
             ]);
