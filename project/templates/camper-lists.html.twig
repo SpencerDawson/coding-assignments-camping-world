@@ -1,0 +1,39 @@
+{# templates/tables.html.twig #}
+  {% extends 'base.html.twig' %}
+  
+{% block stylesheets %}
+    {{ parent() }}
+{#     {{ encore_entry_link_tags('tables') }} #}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{#     {{ encore_entry_script_tags('tables') }} #}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <br/>
+    <div class="container">
+        <h1>Camper Lists</h1>
+        <p>Use the table to view details about that camper list.</p>
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Uploaded</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for upload in uploads %}
+                <tr>
+                    <th scope="row">{{ upload.id }}</th>
+                    <td><a href="{{ path('app_camper', {list_id: upload.id}) }}">{{ upload.name }}</a></td>
+                    <td>{{ upload.getCreateAt|date('d/m/Y HH:mm') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

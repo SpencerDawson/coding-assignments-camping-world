@@ -1,0 +1,42 @@
+{# templates/tables.html.twig #}
+  {% extends 'base.html.twig' %}
+  
+{% block stylesheets %}
+    {{ parent() }}
+{#     {{ encore_entry_link_tags('tables') }} #}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{#     {{ encore_entry_script_tags('tables') }} #}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <br/>
+    <div class="container">
+        <h1>Campers</h1>
+        <table id="camperList" class="display table">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Camper Make</th>
+                <th scope="col">Camper Brand</th>
+                <th scope="col">Sleep Capacity</th>
+                <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for camper in campers %}
+                <tr>
+                    <th scope="row">{{ camper.id }}</th>
+                    <td>{{ camper.make }}</td>
+                    <td>{{ camper.brand }}</td>
+                    <td>{{ camper.capacity }}</td>
+                    <td>${{ camper.price|number_format(2) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

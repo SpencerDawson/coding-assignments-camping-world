@@ -16,12 +16,34 @@ class CamperController extends AbstractController
 {
     /**
      * Path "/"
+     * Name "app_camper_list"
+     */
+    public function index(ManagerRegistry $doctrine): Response
+    {
+        $em = $doctrine->getManager();
+        $uploads = $em->getRepository("App\Entity\Documents")->findAll();
+
+        return $this->render('camper-lists.html.twig', [
+            'title' => 'Camping World - Index',
+            'uploads' => $uploads,
+        ]);
+    }
+
+    /**
+     * Path "/{list_id}"
      * Name "app_camper"
      */
-    public function index(): Response
+    public function show(string $list_id, ManagerRegistry $doctrine): Response
     {
-        return $this->render('tables.html.twig', [
-            'title' => 'Camping World - Index'
+        $em = $doctrine->getManager();
+        $campers = $em->getRepository("App\Entity\Campers")->findBy(
+            ['doc' => $list_id],
+            ['price' => 'ASC'],
+        );
+
+        return $this->render('campers.html.twig', [
+            'title' => 'Camping World - List '.$list_id,
+            'campers' => $campers,
         ]);
     }
 
@@ -57,11 +79,12 @@ class CamperController extends AbstractController
                     /** @var Campers $camper */
                     $camper = new Campers();
                     
+                    // NOTE: Assumtions made here, see /README.md
                     $camper->setDoc($doc);
-                    $camper->setMake($row[0]);
-                    $camper->setBrand($row[1]);
-                    $camper->setCapacity((int)$row[2]);
-                    $camper->setPrice((int)$row[3]);
+                    $camper->setMake(     strcmp($row[0], 'n/a') ? $row[0] : null);
+                    $camper->setBrand(    strcmp($row[1], 'n/a') ? $row[1] : null);
+                    $camper->setCapacity( strcmp($row[2], 'n/a') ? (int)$row[2] : null);
+                    $camper->setPrice(    strcmp($row[3], 'n/a') ? (int)$row[3] : null);
                     
                     $em->persist($camper);
                     $em->flush();

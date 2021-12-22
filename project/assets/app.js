@@ -8,9 +8,17 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
 
-// // loads the jquery package from node_modules
-import $ from 'jquery';
+// loads from node_modules
 import 'bootstrap'
+import $ from 'jquery';
+import 'datatables.net-bs5'
 
 // start the Stimulus application
 import './bootstrap';
+
+$(function(){
+    $('#camperList').DataTable({
+        "paging": false,
+        "info": false
+    });
+});

@@ -8,8 +8,7 @@
 **.crt
 
 ##
-project/public/build/
-project/public/upload/cvs/*
+project/public/uploads/documents/*
 
 ###> symfony/framework-bundle ###
 project/.env.local
