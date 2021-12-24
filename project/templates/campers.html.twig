@@ -32,8 +32,8 @@
                     <th scope="row">{{ camper.id }}</th>
                     <td>{{ camper.make }}</td>
                     <td>{{ camper.brand }}</td>
-                    <td>{{ camper.capacity }}</td>
-                    <td>${{ camper.price|number_format(2) }}</td>
+                    <td>{{ camper.capacity ? camper.capacity : 'N/A' }}</td>
+                    <td>{{ camper.price ? camper.price|format_currency('USD') : 'N/A' }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

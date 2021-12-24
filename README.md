@@ -25,7 +25,7 @@ Site should load at http://localhost:9080/
 
 ### Notice
 
-Most ENV vars exist only within the docker environment, so running `composer require x` for certain symfony packages will fail.  
+Most ENV vars exist only within the docker environment, so running `composer require x` will fail certain default postinstall funcitons. Those can either be disabled in composer.json, or composer fucntions can be executed within the php container.
 
 ```shell
 $ docker exec -it cw_php sh

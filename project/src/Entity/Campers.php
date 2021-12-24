@@ -24,30 +24,30 @@ class Campers
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="make", type="string", length=250, nullable=false)
+     * @ORM\Column(name="make", type="string", length=250, nullable=true)
      */
     private $make;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="brand", type="string", length=250, nullable=false)
+     * @ORM\Column(name="brand", type="string", length=250, nullable=true)
      */
     private $brand;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="capacity", type="integer", nullable=false)
+     * @ORM\Column(name="capacity", type="integer", nullable=true)
      */
     private $capacity;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="price", type="integer", nullable=false)
+     * @ORM\Column(name="price", type="integer", nullable=true)
      */
     private $price;
 

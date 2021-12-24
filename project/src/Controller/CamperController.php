@@ -71,7 +71,7 @@ class CamperController extends AbstractController
             $em->flush();
 
             $rowNo = 1;
-            if (($fp = fopen($doc->getAbsolutePath().$doc->getName(),"r")) !== false)
+            if (($fp = fopen($doc->getWebPath().$doc->getName(),"r")) !== false)
             {
                 while (($row = fgetcsv($fp, 1000, ",")) !== FALSE)
                 {
@@ -81,10 +81,10 @@ class CamperController extends AbstractController
                     
                     // NOTE: Assumtions made here, see /README.md
                     $camper->setDoc($doc);
-                    $camper->setMake(     strcmp($row[0], 'n/a') ? $row[0] : null);
-                    $camper->setBrand(    strcmp($row[1], 'n/a') ? $row[1] : null);
-                    $camper->setCapacity( strcmp($row[2], 'n/a') ? (int)$row[2] : null);
-                    $camper->setPrice(    strcmp($row[3], 'n/a') ? (int)$row[3] : null);
+                    strcmp($row[0], 'n/a') ? $camper->setMake($row[0]) : null;
+                    strcmp($row[1], 'n/a') ? $camper->setBrand($row[1]) : null;
+                    strcmp($row[2], 'n/a') ? $camper->setCapacity($row[2]) : null;
+                    strcmp($row[3], 'n/a') ? $camper->setPrice($row[3]) : null;
                     
                     $em->persist($camper);
                     $em->flush();
@@ -93,7 +93,7 @@ class CamperController extends AbstractController
                 fclose($fp);
             }
 
-            return $this->redirectToRoute('app_camper', [
+            return $this->redirectToRoute('app_camper_list', [
                 'file_name' => $doc->getName(),
             ]);
         }

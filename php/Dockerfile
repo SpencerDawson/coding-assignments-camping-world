@@ -1,5 +1,12 @@
 FROM php:7.4-fpm-alpine
 
+### Arguments
+    ## User ID/Group
+ARG USER USER_ID GROUP_ID
+    ## Give host perms to the docker env
+RUN addgroup -S -g $GROUP_ID $USER &&\
+    adduser -D -H -g '' -u $USER_ID -G dev "$USER" 
+
 ### Environment Vars
     ## Dependancies 
 ENV DEPS_BUILD="curl php7-dev php7-pear libpq-dev postgresql-libs postgresql-dev"\
@@ -41,6 +48,7 @@ RUN chown -R www-data:www-data /var/www/html
 
 ### Setup working directory
 WORKDIR /var/www/html
+USER $USER
 ### Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]

@@ -8,6 +8,11 @@ services:
     build:
       context: ./php
       dockerfile: Dockerfile
+      ## These define the host user within the container
+      args:
+        USER: dev
+        USER_ID: 1000
+        GROUP_ID: 1000
     env_file:
       - ./env/php.env
     volumes:

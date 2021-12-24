@@ -30,7 +30,7 @@
                 <tr>
                     <th scope="row">{{ upload.id }}</th>
                     <td><a href="{{ path('app_camper', {list_id: upload.id}) }}">{{ upload.name }}</a></td>
-                    <td>{{ upload.getCreateAt|date('d/m/Y HH:mm') }}</td>
+                    <td>{{ upload.getCreateAt|date('d/m/Y H:m') }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
