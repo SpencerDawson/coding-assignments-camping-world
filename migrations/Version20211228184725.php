@@ -45,8 +45,8 @@ final class Version20211228184725 extends AbstractMigration
             )");
         
         // create sequences
-        $this->addSql("CREATE SEQUENCE documents_id_seq INCREMENT BY 1 MINVALUE 1 START 1");
-        $this->addSql("CREATE SEQUENCE campers_id_seq INCREMENT BY 1 MINVALUE 1 START 1");
+        $this->addSql("CREATE SEQUENCE IF NOT EXISTS documents_id_seq INCREMENT BY 1 MINVALUE 1 START 1");
+        $this->addSql("CREATE SEQUENCE IF NOT EXISTS campers_id_seq INCREMENT BY 1 MINVALUE 1 START 1");
     }
 
     public function down(Schema $schema): void
