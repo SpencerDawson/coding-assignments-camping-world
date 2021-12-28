@@ -8,15 +8,21 @@
 **.crt
 
 ##
-project/public/uploads/documents/*
+public/uploads/documents/*
 
 ###> symfony/framework-bundle ###
-project/.env.local
-project/.env.local.php
-project/.env.*.local
-project/config/secrets/prod/prod.decrypt.private.php
-project/public/bundles/
-project/var/
-project/vendor/
-project/node_modules/
+.env.local
+.env.local.php
+.env.*.local
+config/secrets/prod/prod.decrypt.private.php
+public/bundles/
+var/
+vendor/
+node_modules/
 ###< symfony/framework-bundle ###
+
+###> symfony/webpack-encore-bundle ###
+node_modules/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
