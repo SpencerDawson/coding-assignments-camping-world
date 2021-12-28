@@ -107,7 +107,7 @@ class CamperController extends AbstractController
     public function info(): Response
     {
         return new Response(
-            phpinfo()
+            phpinfo('INFO_GENERAL')
         );
     }
 }
