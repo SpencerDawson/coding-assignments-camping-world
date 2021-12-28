@@ -1,15 +1,16 @@
 doctrine:
     dbal:
-        default_connection: campingworld
-        connections:
-            campingworld:
-                driver:   '%env(resolve:DB_DRIVER)%'
-                host:     '%env(resolve:DB_HOST)%'
-                port:     '%env(resolve:DB_PORT)%'
-                dbname:   '%env(resolve:DB_DATABASE)%'
-                user:     '%env(resolve:DB_USERNAME)%'
-                # password: '%env(resolve:DB_PASSWORD)%'
-                charset:  '%env(resolve:DB_CHARSET)%'
+        url: '%env(resolve:DATABASE_URL)%'
+        # default_connection: campingworld
+        # connections:
+        #     campingworld:
+        #         driver:   '%env(resolve:DB_DRIVER)%'
+        #         host:     '%env(resolve:DB_HOST)%'
+        #         port:     '%env(resolve:DB_PORT)%'
+        #         dbname:   '%env(resolve:DB_DATABASE)%'
+        #         user:     '%env(resolve:DB_USERNAME)%'
+        #         # password: '%env(resolve:DB_PASSWORD)%'
+        #         charset:  '%env(resolve:DB_CHARSET)%'
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
